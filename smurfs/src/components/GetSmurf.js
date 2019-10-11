@@ -2,17 +2,22 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Smurf from "./Smurf";
 
+import { fetchSmurf } from "../actions";
+
 const GetSmurf = props => {
     useEffect(() => {
         props.fetchSmurf();
     }, []);
+
     if (props.isFetching) {
         return <h2>Smurfing your Smurf...</h2>
     }
     return (
         <div>
             {props.error && <p>{props.error}</p>}
-            <Smurf smurf={props.GetSmurf} />
+            {props.getSmurf.map(smurf => (
+                <Smurf key={smurf.id} smurf={smurf} />
+            ))}
         </div>
     )
 }
@@ -25,4 +30,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchSmurf })(GetSmurf);
+export default connect(
+    mapStateToProps,
+    { fetchSmurf }
+)(GetSmurf);
