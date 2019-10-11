@@ -20,7 +20,6 @@ function App() {
                 <GetSmurf />
                 <SmurfForm />
             </div>
-
         </div>
     );
 }
